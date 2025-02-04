@@ -1,16 +1,21 @@
+import functools
 
 
 def climbStairs(n: int) -> int:
-    values = []
+    values = set()
 
-    def climb(n, lst, values):
+    @functools.lru_cache(maxsize=100, typed=False)
+    def climb(n, lst):
         if n == 0:
-            values.append(lst)
+            values.add(lst)
         elif n < 0:
             return
         else:
             for value in [1, 2]:
-                climb(n - value, lst + (value,), values)
+                climb(n - value, lst + (value,))
 
-    climb(n, (), values)
+    climb(n, ())
     return values
+
+
+print(climbStairs(30))
