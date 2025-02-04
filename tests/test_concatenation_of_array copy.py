@@ -10,8 +10,8 @@ from deepdiff import DeepDiff
 
 
 class TestingClimbingStairs(unittest.TestCase):
-    @parameterized.expand([(2, [(2,), (1, 1)]),
-                           (3, [(2, 1), (1, 2), (1, 1, 1)])])
+    @parameterized.expand([(2, 2),
+                           (3, 3)])
     def test_script(self, nums, verdict):
         valueFound = DeepDiff(climbStairs(nums), verdict, ignore_order=True)
         self.assertEqual(valueFound, {})
