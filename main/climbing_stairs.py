@@ -2,21 +2,16 @@ import functools
 
 
 def climbStairs(n: int) -> int:
-    global values
-    values = 0
 
     @functools.lru_cache(maxsize=100, typed=False)
     def climb(n, lst):
-        global values
         if n == 0:
-            values += 1
+            return 1
         elif n < 0:
-            values += 0
+            return 0
         else:
-            for value in [1, 2]:
-                climb(n - value, lst + (value,))
-    climb(n, ())
-    return values
+            return climb(n - 1, lst + (1,)) + climb(n - 2, lst + (2,))
+    return climb(n, ())
 
 
 print(climbStairs(30))
