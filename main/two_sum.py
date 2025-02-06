@@ -11,14 +11,6 @@ def twoSum(nums: List[int], target: int) -> List[int]:
             return list(sorted([idx, d[diff_from_target][0]]))
         d[number].append(idx)
 
-    # for number in d:
-    #     diff_from_target = target - number
-    #     if diff_from_target in d:
-    #         if diff_from_target == number and len(d[number]) > 1:
-    #             return [d[number][0], d[number][1]]
-    #         elif diff_from_target != number:
-    #             return list(sorted([d[diff_from_target][0], d[number][0]]))
-
 
 """
     # # sorted
