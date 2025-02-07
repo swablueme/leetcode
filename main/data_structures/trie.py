@@ -32,7 +32,7 @@ class Trie:
             current_node = current_node.children[character]
         return current_node
 
-    def starts_with(self, prefix):
+    def is_starts_with(self, prefix):
         return False if self.traverse(prefix) is None else True
 
     def insert(self, word):
