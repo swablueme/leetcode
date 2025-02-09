@@ -1,6 +1,14 @@
 {
   "python.testing.unittestArgs": ["-v", "-s", "./tests", "*test*.py"],
   "python.testing.pytestEnabled": false,
-  "python.testing.unittestEnabled": true
-  // "python.analysis.extraPaths": ["./screenshot"]
+  "python.testing.unittestEnabled": true,
+  "python.analysis.extraPaths": ["./main"],
+  "terminal.integrated.env.windows": {
+    // check with $Env:PythonPath after pressing the play button
+    "PYTHONPATH": "${workspaceRoot}\\main;${workspaceRoot}\\tests;%PYTHONPATH%"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceRoot}/main;${workspaceRoot}/tests;${PYTHONPATH}"
+  },
+  "jupyter.notebookFileRoot": "${workspaceRoot}"
 }
