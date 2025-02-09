@@ -24,8 +24,9 @@ def bfs_trie(object: Trie, graph: Graph, previous=None):
             bfs_trie(value, graph, object)
 
 
-hello = Trie()
-hello.insert("asdfsf")
-draw_trie(hello)
+if __name__ == "__main__":
+    hello = Trie()
+    hello.insert("asdfsf")
+    draw_trie(hello)
 
 # %%

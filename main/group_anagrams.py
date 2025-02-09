@@ -30,6 +30,7 @@ def groupAnagrams2(strs: List[str]) -> List[List[str]]:
     return d.values()
 
 
-print(groupAnagrams2(["act", "pots", "tops", "cat", "stop", "hat"]))
-print(groupAnagrams2([""]))
-print(groupAnagrams2(["a"]))
+if __name__ == "__main__":
+    print(groupAnagrams2(["act", "pots", "tops", "cat", "stop", "hat"]))
+    print(groupAnagrams2([""]))
+    print(groupAnagrams2(["a"]))

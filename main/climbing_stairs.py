@@ -14,4 +14,5 @@ def climbStairs(n: int) -> int:
     return climb(n)
 
 
-print(climbStairs(30))
+if __name__ == "__main__":
+    print(climbStairs(30))

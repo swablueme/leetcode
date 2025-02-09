@@ -45,7 +45,8 @@ def longestCommonPrefix2(strs: List[str]) -> str:
         return ""
 
 
-print(longestCommonPrefix2(["a"]))
-print(longestCommonPrefix2(["flow", "flow", "flow"]))
-print(longestCommonPrefix2(["flower", "flow", "flight"]))
-print(longestCommonPrefix2(["dog", "racecar", "car"]))
+if __name__ == "__main__":
+    print(longestCommonPrefix2(["a"]))
+    print(longestCommonPrefix2(["flow", "flow", "flow"]))
+    print(longestCommonPrefix2(["flower", "flow", "flight"]))
+    print(longestCommonPrefix2(["dog", "racecar", "car"]))
