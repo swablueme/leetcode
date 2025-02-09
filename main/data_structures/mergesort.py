@@ -10,7 +10,7 @@ def merge(array1, array2):
     array1_idx, array2_idx = 0, 0
     built_array = []
     while True:
-        # if one array has hit its limit for extensions then extend
+        # if one array has hit its limit for extensions then extend the one that still has elements left
         if array1_idx == len(array1):
             built_array.extend(array2[array2_idx:])
             break
@@ -18,10 +18,10 @@ def merge(array1, array2):
             built_array.extend(array1[array1_idx:])
             break
 
-        # increment from the left
+        # take the elements to compare
         array1_element = array1[array1_idx]
         array2_element = array2[array2_idx]
-        # take the smaller element either on the left or right. once the element is taken, increment_the_pointer
+        # take the smaller element either on the left or right. once the element is taken, increment the index to consider the next element
         if array1_element <= array2_element:
             built_array.append(array1_element)
             array1_idx += 1
@@ -33,4 +33,5 @@ def merge(array1, array2):
 
 print(mergesort([4, 5, 1, 3, 2]))
 print(mergesort([3, 2, 4, 1, 6]))
+print(mergesort([3, 2, 4, 1]))
 print(mergesort([]))
