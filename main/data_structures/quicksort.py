@@ -1,17 +1,26 @@
 def quickSort(array):
-    if len(array) <= 1:
-        return array
-    to_swap_to_location_idx = 0
-    partition_idx = partition(array)
-    partition_value = array[partition_idx]
+    def sort(array, start_idx, end_idx):
+        array_without_pivot = array[start_idx: end_idx]
 
-    for current_evaluated_idx, value in enumerate(array[:-1]):
-        if value <= partition_value:
-            swap(array, current_evaluated_idx, to_swap_to_location_idx)
-            to_swap_to_location_idx += 1
-    swap(array, partition_idx, to_swap_to_location_idx)
+        if len(array_without_pivot) <= 0:
+            return array
+        to_swap_to_location_idx = start_idx
 
-    return quickSort(array[:to_swap_to_location_idx]) + quickSort(array[to_swap_to_location_idx:])
+        pivot_idx = end_idx
+        pivot_value = array[pivot_idx]
+
+        for idx, current_evaluated_idx in enumerate(array_without_pivot):
+            current_evaluated_idx = idx + start_idx
+            value = array[current_evaluated_idx]
+            if value <= pivot_value:
+                swap(array, start_idx + current_evaluated_idx,
+                     to_swap_to_location_idx)
+                to_swap_to_location_idx += 1
+        swap(array, pivot_idx, to_swap_to_location_idx)
+
+        sort(array, start_idx, max(0, to_swap_to_location_idx - 1))
+        sort(array, to_swap_to_location_idx + 1, end_idx)
+    sort(array, 0, len(array) - 1)
 
 
 def partition(array):
@@ -27,6 +36,8 @@ def swap(array, idx_from, idx_to):
 
 array = [6, 2, 4, 1, 3]
 
+print(quickSort(array))
 
-# print(quickSort(array))
-print(quickSort([2, 0, 2, 1, 1, 0]))
+
+# # print(quickSort(array))
+# print(quickSort([2, 0, 2, 1, 1, 0], 0, 5))
