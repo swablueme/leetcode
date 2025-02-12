@@ -1,6 +1,5 @@
 # https://www.youtube.com/watch?v=gqXU1UyA8pk
 
-
 def get_index(character):
     return ord(character) - ord('A')
 
@@ -9,10 +8,10 @@ def get_char(idx):
     return chr(idx + ord('A'))
 
 
-def is_valid_window(window_end_idx, window_start_idx, hashtable, number_replacements_allowed):
-    array_length = window_end_idx - window_start_idx
+def is_invalid_window(window_end_idx, window_start_idx, hashtable, number_replacements_allowed):
+    array_length = window_end_idx - window_start_idx + 1
     most_freq = max(hashtable)
-    return array_length - most_freq <= number_replacements_allowed
+    return array_length - most_freq > number_replacements_allowed
 
 
 def characterReplacement(s: str, allowed_replacements: int) -> int:
@@ -20,29 +19,27 @@ def characterReplacement(s: str, allowed_replacements: int) -> int:
     window_start_idx, window_end_idx = 0, 0
     hashtable_for_each_character = [0 for idx in range(26)]
 
-    while True:
-        if window_end_idx == len(s):
-            return current_largest
+    for window_end_idx in range(len(s)):
+        array = s[window_start_idx: window_end_idx]
+
         character = get_index(s[window_end_idx])
         hashtable_for_each_character[character] += 1
-        window_end_idx += 1
-        array = s[window_start_idx: window_end_idx]
-        assert len(array) == window_end_idx - window_start_idx
-        if is_valid_window(window_end_idx, window_start_idx, hashtable_for_each_character, allowed_replacements):
+
+        if is_invalid_window(window_end_idx, window_start_idx, hashtable_for_each_character, allowed_replacements) == False:
             current_largest = max(
-                window_end_idx - window_start_idx, current_largest)
+                window_end_idx - window_start_idx + 1, current_largest)
         else:
-            invalid_window = True
-            while invalid_window != False:
-                array = s[window_start_idx: window_end_idx]
-                assert len(array) == window_end_idx - window_start_idx
+            while is_invalid_window(window_end_idx, window_start_idx, hashtable_for_each_character, allowed_replacements) == True:
+                # character to remove
                 character = get_index(s[window_start_idx])
+                # decrease the hashtablet then re-evaluate
                 hashtable_for_each_character[character] -= 1
+                # increment the start to remove the character
                 window_start_idx += 1
-                invalid_window = is_valid_window(window_end_idx, window_start_idx - 1,
-                                                 hashtable_for_each_character, allowed_replacements)
+
             current_largest = max(
-                window_end_idx - window_start_idx, current_largest)
+                window_end_idx - window_start_idx + 1, current_largest)
+    return current_largest
 
 
 assert characterReplacement("AAABABB", 1) == 5
