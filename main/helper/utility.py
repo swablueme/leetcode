@@ -9,13 +9,22 @@ class StartingCharacter:
     TOTAL_ASCII_COUNT = 128
 
 
+def generate_hash_table(number_columns, number_rows):
+    if number_columns > 1:
+        return [
+            [0 for _ in range(number_columns)] for _ in range(number_rows)]
+    else:
+        return [0 for _ in range(number_rows)]
+
+
 class getCharacterIndex:
-    def __init__(self, starting_character=StartingCharacter.ASCII_START,
-                 hash_table_rows=StartingCharacter.TOTAL_ASCII_COUNT,
+    def __init__(self, starting_character=StartingCharacter.LOWERCASE_A,
+                 hash_table_rows=StartingCharacter.TOTAL_ALPHABET_LOWER_COUNT,
                  hash_table_columns=1):
         self.starting_char = starting_character
-        self.hash_table = [
-            [0 for _ in range(hash_table_columns)] for _ in range(hash_table_rows)]
+        self.hash_table = generate_hash_table(
+            hash_table_columns, hash_table_rows)
+        self.number_columns = hash_table_columns
 
     def get_index(self, character):
         return ord(character) - ord(self.starting_char)
@@ -23,17 +32,36 @@ class getCharacterIndex:
     def get_char(self, idx):
         return chr(idx + ord(self.starting_char))
 
+    def _get_hashtable_coordinate(self, character, idx):
+        if self.number_columns > 1:
+            return self.hash_table[self.get_index(character)]
+        elif idx == 0:
+            return self.hash_table
+        else:
+            raise Exception(
+                f"Single column hashtable doesn't possesss column index {idx}!")
+
     def set_value(self, character, value, idx=0):
-        self.hash_table[self.get_index(character)][idx] = value
+        if self.number_columns > 1:
+            self._get_hashtable_coordinate(
+                character, idx).__setitem__(idx, value)
+        else:
+            self._get_hashtable_coordinate(
+                character, idx).__setitem__(self.get_index(character), value)
 
     def increase_value(self, character, value=1, idx=0):
-        self.hash_table[self.get_index(character)][idx] += value
+        updated_value = self.get_value(character, idx) + value
+        self.set_value(character, updated_value, idx)
 
     def decrease_value(self, character, value=1, idx=0):
-        self.hash_table[self.get_index(character)][idx] -= value
+        updated_value = self.get_value(character, idx) - value
+        self.set_value(character, updated_value, idx)
 
     def get_value(self, character, idx=0):
-        return self.hash_table[self.get_index(character)][idx]
+        if self.number_columns > 1:
+            return self._get_hashtable_coordinate(character, idx).__getitem__(idx)
+        else:
+            return self._get_hashtable_coordinate(character, idx).__getitem__(self.get_index(character))
 
     def print(self):
         return {self.get_char(idx): v for idx, v in enumerate(self.hash_table)}
