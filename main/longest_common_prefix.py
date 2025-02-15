@@ -1,7 +1,7 @@
 import math
 from typing import List
 
-from data_structures.trie import Trie
+from helper.trie import Trie
 
 
 def longestCommonPrefix(strs: List[str]) -> str:
