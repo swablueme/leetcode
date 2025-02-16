@@ -1,8 +1,8 @@
-from helper.utility import getCharacterIndex
+from helper.utility import CharacterHashTable
 
 
 def lengthOfLongestSubstring(string: str) -> int:
-    index = getCharacterIndex('\0', 128)
+    index = CharacterHashTable('\0', 128)
     start_idx, end_idx, total_length = 0, 0, 0
     for idx, character in enumerate(string):
         end_idx = idx

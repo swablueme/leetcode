@@ -17,7 +17,7 @@ def generate_hash_table(number_columns, number_rows):
         return [0 for _ in range(number_rows)]
 
 
-class getCharacterIndex:
+class CharacterHashTable:
     def __init__(self, starting_character=StartingCharacter.LOWERCASE_A,
                  hash_table_rows=StartingCharacter.TOTAL_ALPHABET_LOWER_COUNT,
                  hash_table_columns=1):
@@ -65,3 +65,9 @@ class getCharacterIndex:
 
     def print(self):
         return {self.get_char(idx): v for idx, v in enumerate(self.hash_table)}
+
+    def get_hashable(self):
+        if self.number_columns == 1:
+            return tuple(self.hash_table)
+        else:
+            return tuple(tuple(row) for row in self.hash_table)
