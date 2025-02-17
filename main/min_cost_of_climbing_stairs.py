@@ -4,35 +4,23 @@ import math
 
 
 def minCostClimbingStairs(cost):
-    total_cost = math.inf
+    cost = tuple(cost)
 
-    @functools.lru_cache()
-    def climb(cost: List[int], i=0, found_total_cost=0) -> int:
-        nonlocal total_cost
+    @functools.lru_cache(maxsize=300)
+    def climb(i=0) -> int:
         if i > len(cost) - 1:
-            total_cost = min(total_cost, found_total_cost)
-            return
+            return 0
 
+        j = 1
         if i == 0:
-            j = 1
-            foundCost = cost[j]
-            climb(
-                cost, j + 1, found_total_cost + foundCost)
-            climb(
-                cost, j + 2, found_total_cost + foundCost)
-        foundCost = cost[i]
-        climb(
-            cost, i + 1, found_total_cost + foundCost)
-        climb(
-            cost, i + 2, found_total_cost + foundCost)
-    climb(tuple(cost))
-
-    return total_cost
+            return min(cost[j] + min(climb(j + 1), climb(j + 2)), cost[i] + min(climb(i + 1), climb(i + 2)))
+        return cost[i] + min(climb(i + 1), climb(i + 2))
+    return climb()
 
 
-class Solution:
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
-        return minCostClimbingStairs(cost)
+# class Solution:
+#     def minCostClimbingStairs(self, cost: List[int]) -> int:
+#         return minCostClimbingStairs(cost)
 
 
 assert minCostClimbingStairs([100, 99]) == 99
