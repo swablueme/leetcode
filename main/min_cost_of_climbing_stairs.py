@@ -11,11 +11,8 @@ def minCostClimbingStairs(cost):
         if i > len(cost) - 1:
             return 0
 
-        j = 1
-        if i == 0:
-            return min(cost[j] + min(climb(j + 1), climb(j + 2)), cost[i] + min(climb(i + 1), climb(i + 2)))
         return cost[i] + min(climb(i + 1), climb(i + 2))
-    return climb()
+    return min(climb(0), climb(1))
 
 
 # class Solution:
