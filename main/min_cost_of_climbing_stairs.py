@@ -27,3 +27,7 @@ assert minCostClimbingStairs([1, 2, 1, 2, 1, 1, 1]) == 4
 assert minCostClimbingStairs([10, 15, 20]) == 15
 assert minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]) == 6
 # Solution().minCostClimbingStairs([100, 99])
+
+
+values = [5, 4, 3, 2, 1]
+print(list(range(len(values) - 3, -1, -1)))
