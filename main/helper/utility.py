@@ -71,3 +71,22 @@ class CharacterHashTable:
             return tuple(self.hash_table)
         else:
             return tuple(tuple(row) for row in self.hash_table)
+
+
+def visualise_array_slice(string, start_idx, end_idx):
+    array_representation_string = None
+    idx_representation_string = [" " for _ in string]
+    if type(string) == str:
+        array_representation_string = list(string)
+    elif type(string) == list:
+        array_representation_string = string
+
+    idx_representation_string.insert(start_idx, str(start_idx))
+    idx_representation_string.insert(end_idx + 1, str(end_idx))
+    array_representation_string.insert(start_idx, "|")
+    array_representation_string.insert(end_idx + 1, "|")
+
+    string_array_slice_value = "".join(array_representation_string)
+    to_display_slice_idx_value = "".join(idx_representation_string)
+    print(f"   {string_array_slice_value:5s}")
+    print(f"   {to_display_slice_idx_value:5s}")
