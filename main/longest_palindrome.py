@@ -39,6 +39,7 @@ def longestPalindrome(s: str) -> str:
         if len(found_palindrome) > len(max_length):
             max_length = found_palindrome
 
+        # if the previous character is the same, it could be part of an even palindrome
         if prev_char == character:
             found_palindrome = expand(
                 (palindrome_centre_idx - 1, palindrome_centre_idx), s)
