@@ -6,8 +6,9 @@ from functools import lru_cache
 
 def change(coins: List[int], amount: int):
     coin_amounts = {}
+    coins = tuple(coins)
 
-    def coinChange(coins: List[int], amount: int) -> int:
+    def coinChange(amount: int) -> int:
         if amount == 0:
             return 0
         elif amount < 0:
@@ -16,11 +17,11 @@ def change(coins: List[int], amount: int):
             if amount in coin_amounts:
                 return coin_amounts[amount]
             else:
-                min_value = min([1 + coinChange(coins, amount - coin)
+                min_value = min([1 + coinChange(amount - coin)
                                  for coin in coins])
                 coin_amounts[amount] = min_value
                 return min_value
-    found = coinChange(tuple(coins), amount)
+    found = coinChange(amount)
     return -1 if found == math.inf else found
 
 
